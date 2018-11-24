@@ -6,3 +6,7 @@ ruby "2.5.3"
 gem "puma", "~> 3.11"
 gem "rack", "~> 2.0"
 gem "sentry-raven", "~> 2.7"
+
+group :development do
+  gem "pry"
+end
