@@ -5,6 +5,9 @@ require 'evil_ipsum'
 
 if ENV['RACK_ENV'] == "development"
   require 'pry'
+else
+  require 'raven'
+  use Raven::Rack
 end
 
 module EvilRack
