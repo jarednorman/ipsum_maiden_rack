@@ -1,5 +1,7 @@
 ENV['RACK_ENV'] ||= "development"
 
+require 'evil_ipsum'
+
 if ENV['RACK_ENV'] == "development"
   require 'pry'
 end
@@ -10,11 +12,23 @@ module EvilRack
       request = Rack::Request.new(env)
       body = JSON.parse(request.body.read)
 
-      response = {
-        test: 'test test test'
-      }
+      type = body.fetch("type")
+      raise unless type.is_a? String
+      raise unless %w(sentences paragraphs).include? type
 
-      [200, {"Content-Type" => "application/json"}, [response.to_json]]
+      count = body.fetch("count")
+      raise unless count.is_a? Integer
+
+      result =
+        if type == "sentences"
+          EvilIpsum.sentences(count)
+        elsif type == "paragraphs"
+          EvilIpsum.paragraphs(count)
+        end
+
+      [200, {"Content-Type" => "application/json"}, [{
+        result: result
+      }.to_json]]
     end
   end
 end
