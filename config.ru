@@ -1,7 +1,7 @@
 ENV['RACK_ENV'] ||= "development"
 
 require 'json'
-require 'evil_ipsum'
+require 'ipsum_maiden'
 
 if ENV['RACK_ENV'] == "development"
   require 'pry'
@@ -10,7 +10,7 @@ else
   use Raven::Rack
 end
 
-module EvilRack
+module IpsumMaidenRack
   class App
     def call(env)
       request = Rack::Request.new(env)
@@ -25,9 +25,9 @@ module EvilRack
 
       result =
         if type == "sentences"
-          EvilIpsum.sentences(count)
+          IpsumMaiden.sentences(count)
         elsif type == "paragraphs"
-          EvilIpsum.paragraphs(count)
+          IpsumMaiden.paragraphs(count)
         end
 
       [200, {"Content-Type" => "application/json"}, [{
@@ -37,4 +37,4 @@ module EvilRack
   end
 end
 
-run EvilRack::App.new
+run IpsumMaidenRack::App.new
