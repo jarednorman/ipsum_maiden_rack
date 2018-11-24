@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.2)
+    evil_ipsum (0.1.0)
     faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
     method_source (0.9.2)
@@ -18,6 +19,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  evil_ipsum
   pry
   puma (~> 3.11)
   rack (~> 2.0)
