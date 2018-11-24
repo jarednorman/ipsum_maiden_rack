@@ -1,5 +1,6 @@
 ENV['RACK_ENV'] ||= "development"
 
+require 'json'
 require 'evil_ipsum'
 
 if ENV['RACK_ENV'] == "development"
