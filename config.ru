@@ -2,12 +2,21 @@ ENV['RACK_ENV'] ||= "development"
 
 require 'json'
 require 'ipsum_maiden'
+require 'rack/cors'
 
 if ENV['RACK_ENV'] == "development"
   require 'pry'
 else
   require 'raven'
   use Raven::Rack
+end
+
+use Rack::Cors do
+  allowed_origins = ENV.fetch("ALLOWED_ORIGINS").split(",")
+  allow do
+    origins(*allowed_origins)
+    resource '/*', methods: :get, headers: :any
+  end
 end
 
 module IpsumMaidenRack
