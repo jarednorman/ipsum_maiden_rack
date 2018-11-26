@@ -15,7 +15,7 @@ use Rack::Cors do
   allowed_origins = ENV.fetch("ALLOWED_ORIGINS").split(",")
   allow do
     origins(*allowed_origins)
-    resource '/*', methods: :get, headers: :any
+    resource '/*', methods: :any, headers: :any
   end
 end
 
