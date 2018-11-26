@@ -31,6 +31,7 @@ module IpsumMaidenRack
 
       count = body.fetch("count")
       raise unless count.is_a? Integer
+      raise if count > 1000
 
       result =
         if type == "sentences"
